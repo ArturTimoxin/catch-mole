@@ -1,15 +1,18 @@
-import {SCORE_INCREMENT} from '../constants/constants';
+import {SET_SCORE, ADD_DIFFICULTY_LEVEL} from '../constants/constants';
 
 const initialState = {
     score: 0,
-    difficult: 1,
+    difficult: 0,
     time: 2000,
 };
 
 export function gameReducer(state = initialState, action) {
     switch (action.type) {
-      case SCORE_INCREMENT: {
-        return { ...state, score: this.score++ };
+      case SET_SCORE: {
+        return { ...state, score: action.payload};
+      }
+      case ADD_DIFFICULTY_LEVEL: {
+        return { ...state, difficult: action.payload.difficult, time: action.payload.time};
       }
       default:
         return state;

@@ -6,7 +6,7 @@ const StatusBar = (props) => {
           <h2>Status Bar</h2>
           <div className="info">
             <div>Game difficult: {props.difficult}</div>
-            <div>Score: {props.score} point(s)</div>
+            <div>Score: {props.score} / 100 point(s)</div>
             <div>Time: {props.time} ms</div>
           </div>
         </div>
