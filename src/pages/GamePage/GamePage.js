@@ -8,6 +8,9 @@ class GamePage extends Component {
       showMoleInBurrow: [0, 0, 0, 0, 0, 0],
       runGame: false,
       titleModal: 'START',
+      showMoleTime: 0, // время запуска показа крота
+      catchTime: 0, // время ловли крота - изначально равно времени запуска. 
+      fails: 0,
     }
     startGame = () => {
       clearInterval(this.state.timerId);
@@ -17,6 +20,8 @@ class GamePage extends Component {
 
     runGame = (timeDelay) => {
       let timerId = setInterval(() => {
+        let ms = new Date().getTime(); 
+        this.setState({showMoleTime: ms, catchTime: ms });
         let newShowMoleInBurrow = [0,0,0,0,0,0];
         this.setState({showMoleInBurrow: newShowMoleInBurrow});
         newShowMoleInBurrow[Math.floor(Math.random() * 6)] = 1;
@@ -38,14 +43,14 @@ class GamePage extends Component {
       let newScore = this.props.score + 1;
       this.props.setScoreAction(newScore);
       this.setState({showMoleInBurrow: newShowMoleInBurrow});
-      if(newScore % 10 === 0 && newScore !== 0) {
+      if(newScore % 10 === 0) {
           let newLevelDifficult = this.props.difficult + 1;
           let newTimeDelay = 2000 - 130 * newLevelDifficult;
           this.props.addDifficultyLevelAction(newLevelDifficult, newTimeDelay);
           clearInterval(this.state.timerId);
           this.runGame(newTimeDelay);
       } 
-      if(newScore === 10) { 
+      if(newScore === 100) { 
         this.endGame('YOU WIN! Click for start again');
       }
     }
@@ -92,6 +97,6 @@ const mapStateToProps = store => {
   };
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-    )(GamePage);
+  mapStateToProps,
+  mapDispatchToProps,
+)(GamePage);
