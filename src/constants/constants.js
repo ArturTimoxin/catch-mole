@@ -1,0 +1,1 @@
+export const SCORE_INCREMENT = 'SCORE_INCREMENT';
