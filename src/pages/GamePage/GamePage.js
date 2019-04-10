@@ -49,8 +49,8 @@ class GamePage extends Component {
       this.props.addDifficultyLevelAction(0, 2000);
     }
 
-    runGame = (timeDelay) => {
-      let timerId = setInterval(() => {
+    runGame = (timeDelay) => {;
+      let gameTimerId = setInterval(() => {
         let newMoles = this.state.moles;
         let catchMole = newMoles.find(elem => {
           return elem.catch;
@@ -86,16 +86,16 @@ class GamePage extends Component {
           }
         }
       } ,timeDelay)
-      this.setState({timerId});
+      this.setState({gameTimerId});
     }
 
     endGame = (titleModal) => {
       let newMoles = this.state.moles;
       newMoles.forEach(elem => {
         elem.show = false;
-        elem.catch = true; // чтобы при первом показе крота не бьло засчитан fail
+        elem.catch = true; // чтобы при первом показе крота не бьл засчитан fail
       }) 
-      clearInterval(this.state.timerId);
+      clearInterval(this.state.gameTimerId);
       this.setState({moles: newMoles});
       setTimeout(() => this.setState({runGame: false, titleModal: titleModal}), 1000);
     }
@@ -115,7 +115,7 @@ class GamePage extends Component {
           let newLevelDifficult = this.props.difficult + 1;
           let newTimeDelay = 2000 - 130 * newLevelDifficult;
           this.props.addDifficultyLevelAction(newLevelDifficult, newTimeDelay);
-          clearInterval(this.state.timerId);
+          clearInterval(this.state.gameTimerId);
           this.runGame(newTimeDelay);
       } 
       if(newScore === 100) { 
@@ -125,13 +125,13 @@ class GamePage extends Component {
 
   render() {
       const {moles, runGame, titleModal} = this.state;
-      const {score, time, difficult, countFails } = this.props;
+      const {score, difficult, countFails } = this.props;
     return (
       <div className="wrapper">
         <h1>CATCH THE MOLE</h1>
         <div className="wrapperGame">
             <GridBurrows startGame={this.startGame} catchMole={this.catchMole} runGame={runGame} moles={moles} titleModal={titleModal} />
-            <StatusBar score={score} time={time} difficult={difficult} countFails={countFails}/>
+            <StatusBar score={score} difficult={difficult} countFails={countFails}/>
         </div>
       </div>
     )
