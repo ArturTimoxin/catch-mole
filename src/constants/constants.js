@@ -1,2 +1,3 @@
 export const SET_SCORE = 'SET_SCORE';
 export const ADD_DIFFICULTY_LEVEL = 'ADD_DIFFICULTY_LEVEL';
+export const SET_COUNT_FAILS = 'SET_COUNT_FAILS';
