@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import StatusBar from '../../components/StatusBar/StatusBar';
 import GridBurrows from '../../components/GridBurrows/GridBurrows'
 import {SET_SCORE, ADD_DIFFICULTY_LEVEL, SET_COUNT_FAILS} from '../../constants/constants';
+
 // все кроты изначально "как бы" пойманы чтобы пройти первую проверку на наличие пойманых кротов
 class GamePage extends Component {
     state = {
